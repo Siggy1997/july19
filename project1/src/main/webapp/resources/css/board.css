@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'SBAggroB';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'GangwonEdu_OTFBoldA';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+table {
+	margin: 0 auto;
+	width: 800px;
+	height: 500px;
+	color: black;
+}
+
+th {
+	font-family: 'SBAggroB';
+	height: 50px;
+	background-color: black;
+	color: white;
+}
+
+td {
+	font-family: 'GangwonEdu_OTFBoldA';
+	text-align: center;
+	border-bottom: 2px dotted black;
+	border-right: 2px dotted;
+	border-left:2px dotted;
+	font-weight: bolder;
+}
+
+.td1 {
+	width: 10%;
+}
+
+.td2 {
+	width: 20%;
+}
+
+.title {
+	text-align: center;
+}
+
+tr:hover {
+	background-color: #BDBDBD;
+	font-weight: bolder;
