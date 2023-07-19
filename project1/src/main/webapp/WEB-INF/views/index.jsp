@@ -14,7 +14,7 @@
 <br>
 <br>
 <br>
-<embed src="./img/music.mp4" loop="true" autostart="true" width="2" height="0">
+<embed src="./img/music.mp4" loop="true" autostart="true" width="2" height="0" >
 <br>
 <div class="siggy">WELCOME<br>TO<br>SIGGY WORLD</div>
 </body>
