@@ -12,4 +12,23 @@ public class IndexController {
 		return"index"; //데이터 붙임 없이 index.jsp페이지만 보여줍니다
 	}
 	
+	@GetMapping("/menu")
+	public String menu() {
+		return "menu";
+	}
+	
+	//임시
+	@GetMapping("/board2")
+	public String menu2() {
+		return "board2";
+	}
+	
+	@GetMapping("/mooni")
+	public String mooni() {
+		return "mooni";
+	}
+	@GetMapping("/notice")
+	public String notice() {
+		return "notice";
+	}
 }

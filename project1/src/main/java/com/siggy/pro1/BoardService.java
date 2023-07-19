@@ -38,4 +38,10 @@ public class BoardService {
 
 		return boardDAO.detail(bno);
 	}
+
+	public void write(BoardDTO dto) {
+		boardDAO.write(dto);
+		//select를 제외한 나머지는 영향받은 행의 수 (int)를 받아오기도 합니다
+		
+	}
 }

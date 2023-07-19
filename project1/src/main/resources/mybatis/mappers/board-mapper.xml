@@ -6,7 +6,8 @@
 	<select id="boardList" resultType="Map">
 		SELECT *
 		FROM board
-		ORDER BY bno DESC
+		ORDER BY bno
+		DESC
 		LIMIT 10
 	</select>
 	<!-- #{변수명}을 적어주면 변수가 들어가요 -->
@@ -16,5 +17,11 @@
 		WHERE bno =#{bno}
 	</select>
 
+	<insert id="write" parameterType="boardDTO">
+		INSERT INTO board (btitle,
+		bcontent, bwrite)
+		VALUES(#{btitle}, #{bcontent}, #{bwrite} );
+
+	</insert>
 
 </mapper>

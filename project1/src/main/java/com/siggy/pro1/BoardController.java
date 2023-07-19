@@ -6,12 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class BoardController {
 	//user -> Controller -> Service -> DAO -> mybatis -> DB
 	
-	//AutoWired 말고 resource로 연결
+	//AutoWired 말고 resource로 연결zz
 	@Resource(name = "boardService")
 	//자바가 이름으로 연결해줍니다
 	private BoardService boardService;
@@ -38,7 +39,57 @@ public class BoardController {
 		return "detail";
 	}
 	
+	@GetMapping("/write")
+	public String write() {
+		return "write";
+	}
 	
+	@PostMapping("/write")
+	public String write(HttpServletRequest request) {
+		//사용자가 입력한 데이터 변수에 담기
+		//Service -> DAO -> mybatis -> DB로 보내서 저장하기
+		//System.out.println(request.getParameter("title"));
+		//System.out.println(request.getParameter("content"));
+		
+		//상대방 ip가져오기 2023/07-19 
+		String ip = null;
+	      
+	      ip = request.getHeader("X-Forwarded-For");
+
+	      if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+	         ip = request.getHeader("Proxy-Client-IP");
+	      }
+	      if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+	         ip = request.getHeader("WL-Proxy-Client-IP");
+	      }
+	      if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+	         ip = request.getHeader("HTTP_CLIENT_IP");
+	      }
+	      if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+	         ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+	      }
+	      if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+	         ip = request.getHeader("X-Real-IP");
+	      }
+	      if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+	         ip = request.getHeader("X-RealIP");
+	      }
+	      if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+	         ip = request.getHeader("REMOTE_ADDR");
+	      }
+	      if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+	         ip = request.getRemoteAddr();
+	      }
+		
+		BoardDTO dto = new BoardDTO();
+		dto.setBtitle(request.getParameter("title"));
+		dto.setBcontent(ip + request.getParameter("content"));
+		dto.setBwrite("Siggy");
+		
+		boardService.write(dto);
+		
+		return "redirect:board";
+	}
 	
 	
 }
