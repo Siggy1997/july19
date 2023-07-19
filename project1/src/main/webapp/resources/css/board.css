@@ -35,15 +35,11 @@
 .hi a {
 	text-decoration: none;
 	color: white;
-	
 }
 
-.back{
-	margin: 0 auto;
-}
 
 body {
-	background-image: url(".`./img/heart.gif");
+	background-image: url("../img/heart.gif");
 	background-repeat: no-repeat;
 	background-size: 30%;
 	background-position: center;

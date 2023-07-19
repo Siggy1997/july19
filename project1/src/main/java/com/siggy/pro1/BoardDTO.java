@@ -2,7 +2,7 @@ package com.siggy.pro1;
 
 public class BoardDTO {
 	private int bno, blike;
-	private String btitle, bcontent, bdate, bwrite;
+	private String btitle, bcontent, bdate, bwrite, bip;
 
 	public int getBno() {
 		return bno;
@@ -50,6 +50,14 @@ public class BoardDTO {
 
 	public void setBwrite(String bwrite) {
 		this.bwrite = bwrite;
+	}
+
+	public String getBip() {
+		return bip;
+	}
+
+	public void setBip(String bip) {
+		this.bip = bip;
 	}
 
 }

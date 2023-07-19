@@ -3,10 +3,12 @@ package com.siggy.pro1;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BoardController {
@@ -17,6 +19,9 @@ public class BoardController {
 	//자바가 이름으로 연결해줍니다
 	private BoardService boardService;
 	
+	
+	@Autowired
+	private Util util;
 	
 	
 	@GetMapping("/board")
@@ -51,43 +56,29 @@ public class BoardController {
 		//System.out.println(request.getParameter("title"));
 		//System.out.println(request.getParameter("content"));
 		
-		//상대방 ip가져오기 2023/07-19 
-		String ip = null;
-	      
-	      ip = request.getHeader("X-Forwarded-For");
 
-	      if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-	         ip = request.getHeader("Proxy-Client-IP");
-	      }
-	      if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-	         ip = request.getHeader("WL-Proxy-Client-IP");
-	      }
-	      if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-	         ip = request.getHeader("HTTP_CLIENT_IP");
-	      }
-	      if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-	         ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-	      }
-	      if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-	         ip = request.getHeader("X-Real-IP");
-	      }
-	      if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-	         ip = request.getHeader("X-RealIP");
-	      }
-	      if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-	         ip = request.getHeader("REMOTE_ADDR");
-	      }
-	      if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-	         ip = request.getRemoteAddr();
-	      }
-		
 		BoardDTO dto = new BoardDTO();
 		dto.setBtitle(request.getParameter("title"));
-		dto.setBcontent(ip + request.getParameter("content"));
+		dto.setBcontent(util.getIp() + request.getParameter("content"));
+		dto.setBip(util.getIp()); //얻어온 ip도 저장해서 데이터 베이스로 보내겠습니다
 		dto.setBwrite("Siggy");
 		
 		boardService.write(dto);
 		
+		return "redirect:board";
+	}
+	
+	@GetMapping("/delete")
+	public String delete(@RequestParam(value = "bno", required = false, defaultValue = "0") int bno) { 
+		//HttpServletRequest의 getParameter();합친거
+		
+		//dto
+		BoardDTO dto = new BoardDTO();
+		dto.setBno(bno);
+		//추후 로그인 하면 사용자의 정보도 담아서 보냅니다
+		
+		boardService.delete(dto);
+		System.out.println("bno : " + bno);
 		return "redirect:board";
 	}
 	
